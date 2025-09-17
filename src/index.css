@@ -1,0 +1,577 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    margin: 0;
+    width: 100%; /* Ensure body takes full width */
+}
+
+#root {
+    width: 100%;
+    max-width: 100%; /* Set max-width to 100% for the entire app */
+    background: #fff;
+    /* Removed border-radius from root to make header sharp */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+}
+
+.app-header {
+    background: #007bff;
+    color: #fff;
+    padding: 1rem;
+    /* Ensure header has sharp corners */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    display: flex; /* Use flexbox for header content */
+    justify-content: space-between; /* Push items to ends */
+    align-items: center; /* Vertically center items */
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff; /* Ensure title color is white */
+}
+
+.app-header.login-header {
+    justify-content: space-between; /* Push items to ends for login page header */
+}
+
+.app-header.login-header .filter-buttons-header {
+    display: none; /* Hide filter buttons on login page */
+}
+
+.dark-mode-toggle-login {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #fff; /* White border for header buttons */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white background */
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle-login:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark-mode-toggle-login.active {
+    background-color: #fff;
+    color: #007bff;
+}
+
+.filter-buttons-header {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-buttons-header button {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #fff; /* White border for header buttons */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white background */
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-buttons-header button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.filter-buttons-header button.active {
+    background-color: #fff;
+    color: #007bff;
+}
+
+.main-content {
+    padding: 2rem;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 50%; /* Set max-width to 50% */
+    margin: 0 auto; /* Center the form */
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.toggle-form {
+    margin-top: 1rem;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.logged-in-container {
+    text-align: center;
+}
+
+.task-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.task-input-form input[type="text"],
+.task-input-form textarea {
+    width: calc(100% - 1.6rem); /* Adjust for padding */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 40px;
+}
+
+.task-input-form button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #28a745; /* Green for add button */
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.task-input-form button:hover:not(:disabled) {
+    background: #218838;
+}
+
+.task-input-form button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.task-list {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.task-list h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.task-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.task-list li {
+    background: #fefefe;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    display: flex; /* Use flexbox for list items */
+    flex-wrap: wrap; /* Allow items to wrap */
+    align-items: flex-start; /* Align items to the start */
+}
+
+.task-list li .task-content {
+    display: flex;
+    justify-content: space-between; /* Space between details and actions */
+    width: 100%; /* Take full width of the li */
+    align-items: center;
+}
+
+.task-list li .task-details {
+    display: flex;
+    flex-direction: column; /* Stack details vertically */
+    flex-grow: 1; /* Allow details to take available space */
+}
+
+.task-list li.completed {
+    background: #e9f7ef; /* Light green for completed tasks */
+    text-decoration: line-through;
+    color: #888;
+}
+
+.task-list li .task-title-row {
+    display: flex;
+    align-items: center; /* Vertically align checkbox and title */
+    gap: 0.5rem; /* Space between checkbox and title */
+    margin-bottom: 0.5rem; /* Space below the title row */
+}
+
+.task-list li h4 {
+    margin: 0; /* Remove default margin from h4 */
+    font-size: 1.1rem; /* Adjust font size for title */
+    color: #007bff;
+}
+
+.task-list li p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.task-list li .task-actions {
+    margin-left: auto; /* Push buttons to the right */
+    display: flex;
+    gap: 0.5rem; /* Space between buttons */
+    align-items: center;
+}
+
+.task-list li .task-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none; /* Remove default button border */
+    color: #fff; /* Default text color for buttons */
+}
+
+.task-list li .edit-button {
+    background-color: #007bff; /* Blue for edit button */
+}
+
+.task-list li .edit-button:hover {
+    background-color: #0056b3;
+}
+
+.task-list li .delete-button {
+    background-color: #dc3545; /* Red for delete button */
+}
+
+.task-list li .delete-button:hover {
+    background-color: #c82333;
+}
+
+.task-list li .archive-button {
+    background-color: #6c757d; /* Grey for archive button */
+}
+
+.task-list li .archive-button:hover {
+    background-color: #5a6268;
+}
+
+.task-list li .delete-button:hover {
+    background-color: #c82333;
+}
+
+.task-list li .edit-button {
+    background-color: #007bff; /* Blue for edit button */
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task-list li .edit-button:hover {
+    background-color: #0056b3;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f0f8ff; /* Light blue background for edit form */
+}
+
+.edit-form input[type="text"],
+.edit-form textarea {
+    width: calc(100% - 1.6rem);
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.edit-form button {
+    padding: 0.6rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-form button:first-of-type { /* Save button */
+    background-color: #28a745;
+    color: #fff;
+}
+
+.edit-form button:first-of-type:hover {
+    background-color: #218838;
+}
+
+.edit-form .cancel-button {
+    background-color: #6c757d; /* Grey for cancel button */
+    color: #fff;
+}
+
+.edit-form .cancel-button:hover {
+    background-color: #5a6268;
+}
+
+.task-input-form input[type="date"],
+.edit-form input[type="date"] {
+    width: calc(100% - 1.6rem);
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.task-list li p.due-date {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.3rem;
+}
+
+.filter-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.filter-buttons button {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background-color: #e7f3ff;
+}
+
+.filter-buttons button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.clear-completed-button {
+    background-color: #ffc107; /* Yellow for clear completed button */
+    color: #333;
+    border: 1px solid #ffc107;
+}
+
+.clear-completed-button:hover {
+    background-color: #e0a800;
+    border-color: #e0a000;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #343a40; /* Dark background for the body */
+    color: #e0e0e0; /* Light text color */
+}
+
+.dark-mode #root {
+    background-color: #495057; /* Darker background for the app container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .app-header {
+    background-color: #212529; /* Even darker header */
+}
+
+.dark-mode .app-header h1 {
+    color: #e0e0e0;
+}
+
+.dark-mode .main-content h1,
+.dark-mode .task-list h3 {
+    color: #e0e0e0;
+}
+
+.dark-mode .form-container input,
+.dark-mode .task-input-form input[type="text"],
+.dark-mode .task-input-form textarea,
+.dark-mode .edit-form input[type="text"],
+.dark-mode .edit-form textarea,
+.dark-mode .task-input-form input[type="date"],
+.dark-mode .edit-form input[type="date"],
+.dark-mode .edit-form select {
+    background-color: #6c757d;
+    color: #e0e0e0;
+    border-color: #5a6268;
+}
+
+.dark-mode .form-container input::placeholder,
+.dark-mode .task-input-form input[type="text"]::placeholder,
+.dark-mode .task-input-form textarea::placeholder,
+.dark-mode .edit-form input[type="text"]::placeholder,
+.dark-mode .edit-form textarea::placeholder {
+    color: #adb5bd;
+}
+
+.dark-mode button {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.dark-mode button:hover {
+    background-color: #003f7f;
+}
+
+.dark-mode .toggle-form {
+    color: #8ecdfc;
+}
+
+.dark-mode .task-input-form {
+    background-color: #5a6268;
+    border-color: #495057;
+}
+
+.dark-mode .task-input-form button {
+    background-color: #28a745;
+}
+
+.dark-mode .task-input-form button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.dark-mode .task-list li {
+    background: #6c757d;
+    border-color: #5a6268;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .task-list li.completed {
+    background: #5a6268;
+    color: #adb5bd;
+}
+
+.dark-mode .task-list li h4 {
+    color: #8ecdfc;
+}
+
+.dark-mode .task-list li p {
+    color: #e0e0e0;
+}
+
+.dark-mode .task-list li .task-actions button {
+    background-color: #007bff;
+}
+
+.dark-mode .task-list li .task-actions button:hover {
+    background-color: #0056b3;
+}
+
+.dark-mode .task-list li .delete-button {
+    background-color: #dc3545;
+}
+
+.dark-mode .task-list li .delete-button:hover {
+    background-color: #c82333;
+}
+
+.dark-mode .task-list li .archive-button {
+    background-color: #adb5bd;
+    color: #343a40;
+}
+
+.dark-mode .task-list li .archive-button:hover {
+    background-color: #9fa6ad;
+}
+
+.dark-mode .edit-form {
+    background-color: #5a6268;
+    border-color: #495057;
+}
+
+.dark-mode .edit-form button:first-of-type {
+    background-color: #28a745;
+}
+
+.dark-mode .edit-form button:first-of-type:hover {
+    background-color: #218838;
+}
+
+.dark-mode .edit-form .cancel-button {
+    background-color: #adb5bd;
+    color: #343a40;
+}
+
+.dark-mode .edit-form .cancel-button:hover {
+    background-color: #9fa6ad;
+}
+
+.dark-mode .filter-buttons-header button {
+    border-color: #adb5bd;
+    background-color: rgba(173, 181, 189, 0.2);
+    color: #e0e0e0;
+}
+
+.dark-mode .filter-buttons-header button:hover {
+    background-color: rgba(173, 181, 189, 0.4);
+}
+
+.dark-mode .filter-buttons-header button.active {
+    background-color: #adb5bd;
+    color: #343a40;
+}
+
+.dark-mode .clear-completed-button {
+    background-color: #ffc107;
+    color: #333;
+    border-color: #ffc107;
+}
+
+.dark-mode .clear-completed-button:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
